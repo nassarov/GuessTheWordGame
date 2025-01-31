@@ -32,6 +32,8 @@ function generateInputs() {
 
     inputsContainer.appendChild(tryDiv);
   }
+  //   Focus Try 1
+  inputsContainer.children[0].children[1].focus();
 }
 
 window.onload = () => generateInputs();
