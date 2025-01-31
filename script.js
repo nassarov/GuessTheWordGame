@@ -11,6 +11,7 @@ let currentTry = 1; // initial state focus on try 1
 
 function generateInputs() {
   const inputsContainer = document.querySelector(".inputs");
+  //   Create Main Try Div
   for (let i = 1; i <= numOfTries; i++) {
     const tryDiv = document.createElement("div");
     tryDiv.classList.add(`try-${i}`);
@@ -20,8 +21,14 @@ function generateInputs() {
     if (i !== 1) {
       tryDiv.classList.add("disabled-inputs");
     }
-
-    
+    // Create Letter Inputs
+    for (let j = 1; j <= numOfLetters; j++) {
+      const input = document.createElement("input");
+      input.type = "text";
+      input.id = `guess-${i}-letter-${j}`;
+      input.setAttribute("maxlength", "1");
+      tryDiv.appendChild(input);
+    }
 
     inputsContainer.appendChild(tryDiv);
   }
