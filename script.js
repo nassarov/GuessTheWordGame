@@ -155,6 +155,20 @@ function getHint() {
   if (numOfHints === 0) {
     hintButton.disabled = true;
   }
+  //  selecting only enabled inputs
+  const enabledInputs = document.querySelectorAll("input:not([disabled])");
+  //   specify the empty inputs only
+  const emptyEnabledInputs = Array.from(enabledInputs).filter(
+    (input) => input.value === ""
+  );
+  if (emptyEnabledInputs.length > 0) {
+    const randomIndex = Math.floor(Math.random() * emptyEnabledInputs.length);
+    const randomInput = emptyEnabledInputs[randomIndex];
+    const indexToFill = Array.from(enabledInputs).indexOf(randomInput);
+    if (indexToFill !== -1) {
+      randomInput.value = wordToGuess[indexToFill].toUpperCase();
+    }
+  }
 }
 
 window.onload = () => generateInputs();
