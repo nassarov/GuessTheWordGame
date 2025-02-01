@@ -46,7 +46,9 @@ function generateInputs() {
     // Convert input to Uppercase
     input.addEventListener("input", function () {
       this.value = this.value.toUpperCase();
-      
+      //   moving to next input
+      const nextInput = inputs[index + 1];
+      if (nextInput) nextInput.focus();
     });
   });
 }
