@@ -9,6 +9,12 @@ let numOfTries = 5;
 let numOfLetters = 6;
 let currentTry = 1; // initial state focus on try 1
 
+// Manage Words
+let wordToGuess = "";
+const words = ["School", "Create", "Update", "Delete", "Master", "Branch"];
+// random word
+wordToGuess = words[Math.floor(Math.random() * words.length)].toLowerCase();
+
 function generateInputs() {
   const inputsContainer = document.querySelector(".inputs");
   //   Create Main Try Div
@@ -55,7 +61,6 @@ function generateInputs() {
     input.addEventListener("keydown", function (event) {
       //   console.log(event); display props of the event keypressed key:ArrowLeft / target:(input#guess-1-letter-6)
       const currentIndex = Array.from(inputs).indexOf(event.target); // getting index of target
-      console.log(currentIndex);
       if (event.key === "ArrowRight" || event.key === "Enter") {
         const nextInput = currentIndex + 1;
         // making sure inside the range
@@ -76,6 +81,33 @@ function generateInputs() {
       }
     });
   });
+}
+console.log(wordToGuess);
+const checkButton = document.querySelector(".check");
+checkButton.addEventListener("click", handleChecks);
+function handleChecks() {
+  let successGuess = true;
+  for (let i = 1; i <= numOfLetters; i++) {
+    const inputField = document.querySelector(
+      `#guess-${currentTry}-letter-${i}`
+    );
+    const inputLetter = inputField.value.toLowerCase(); // letter
+    const actualLetter = wordToGuess[i - 1]; //actual letter of word
+
+    // GAME LOGIC
+    // correct and in place
+    if (inputLetter === actualLetter) {
+      inputField.classList.add("yes-in-place");
+      //   correct not in place
+    } else if (wordToGuess.includes(inputLetter) && inputLetter !== "") {
+      inputField.classList.add("not-in-place");
+      successGuess = false;
+    } else {
+      inputField.classList.add("no");
+      successGuess = false;
+    }
+  }
+  
 }
 
 window.onload = () => generateInputs();
