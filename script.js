@@ -117,7 +117,15 @@ function handleChecks() {
     // disable buttons
     checkButton.disabled = true;
   }
-
+  //   needed now to access the rest inputs
+  else {
+    // disable previous inputs
+    document
+      .querySelector(`.try-${currentTry}`)
+      .classList.add("disabled-inputs");
+    const currTryInputs = document.querySelectorAll(`.try-${currentTry} input`);
+    currTryInputs.forEach((input) => (input.disabled = true));
+  }
 }
 
 window.onload = () => generateInputs();
