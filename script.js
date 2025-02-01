@@ -14,6 +14,7 @@ let wordToGuess = "";
 const words = ["School", "Create", "Update", "Delete", "Master", "Branch"];
 // random word
 wordToGuess = words[Math.floor(Math.random() * words.length)].toLowerCase();
+let messageArea = document.querySelector(".message");
 
 function generateInputs() {
   const inputsContainer = document.querySelector(".inputs");
@@ -107,7 +108,16 @@ function handleChecks() {
       successGuess = false;
     }
   }
-  
+  // Check if user win or lose
+  if (successGuess) {
+    messageArea.innerHTML = `You win The word was <span>${wordToGuess}</span>`;
+    // add disabled class to all inputs
+    let allTries = document.querySelectorAll(".inputs > div");
+    allTries.forEach((tryDiv) => tryDiv.classList.add("disabled-inputs"));
+    // disable buttons
+    checkButton.disabled = true;
+  }
+
 }
 
 window.onload = () => generateInputs();
