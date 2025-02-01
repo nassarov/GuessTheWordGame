@@ -125,6 +125,9 @@ function handleChecks() {
       .classList.add("disabled-inputs");
     const currTryInputs = document.querySelectorAll(`.try-${currentTry} input`);
     currTryInputs.forEach((input) => (input.disabled = true));
+    currentTry++;
+    const nextTryInputs = document.querySelectorAll(`.try-${currentTry} input`);
+    nextTryInputs.forEach((input) => (input.disabled = false));
   }
 }
 
