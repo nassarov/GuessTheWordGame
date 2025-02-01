@@ -128,6 +128,17 @@ function handleChecks() {
     currentTry++;
     const nextTryInputs = document.querySelectorAll(`.try-${currentTry} input`);
     nextTryInputs.forEach((input) => (input.disabled = false));
+
+    let ele = document.querySelector(`.try-${currentTry}`);
+    if (ele) {
+      document
+        .querySelector(`.try-${currentTry}`)
+        .classList.remove("disabled-inputs");
+      ele.children[1].focus();
+    } else {
+      checkButton.disabled = true;
+      messageArea.innerHTML = `You Lose! The word was <span>${wordToGuess}</span>`;
+    }
   }
 }
 
