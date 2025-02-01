@@ -37,6 +37,41 @@ h1 {
         font-weight: bold;
       }
     }
+    .control {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 500px;
+      margin: 30px auto;
+      gap: 14px;
+      .check {
+        border: none;
+        padding: 15px;
+        font-size: 25px;
+        font-weight: 500;
+        border-radius: 6px;
+        cursor: pointer;
+        flex: 1;
+        background-color: #f1c40f;
+        color: white;
+      }
+      .hint {
+        border: none;
+        font-size: 25px;
+        padding: 15px 20px;
+        border-radius: 6px;
+        background-color: #009688;
+        color: white;
+        font-weight: 500;
+        cursor: pointer;
+        width: fit-content;
+      }
+      button:disabled{
+        background-color: black;
+        opacity: 0.4;
+        cursor: no-drop;
+      }
+    }
     .disabled-inputs {
       opacity: 0.5;
       pointer-events: none;
