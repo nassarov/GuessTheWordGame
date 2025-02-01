@@ -40,6 +40,15 @@ function generateInputs() {
     ".disabled-inputs input"
   );
   inputInDisabledDiv.forEach((input) => (input.disabled = true));
+
+  const inputs = document.querySelectorAll("input");
+  inputs.forEach((input, index) => {
+    // Convert input to Uppercase
+    input.addEventListener("input", function () {
+      this.value = this.value.toUpperCase();
+      
+    });
+  });
 }
 
 window.onload = () => generateInputs();
