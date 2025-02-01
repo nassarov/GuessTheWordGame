@@ -8,13 +8,18 @@ document.querySelector("footer").innerHTML = `${gameName} Created By Nassarov`;
 let numOfTries = 5;
 let numOfLetters = 6;
 let currentTry = 1; // initial state focus on try 1
-
+let numOfHints = 2;
 // Manage Words
 let wordToGuess = "";
 const words = ["School", "Create", "Update", "Delete", "Master", "Branch"];
 // random word
 wordToGuess = words[Math.floor(Math.random() * words.length)].toLowerCase();
 let messageArea = document.querySelector(".message");
+
+// Manage Hints in html
+document.querySelector(".hint > span").innerHTML = numOfHints;
+const hintButton = document.querySelector(".hint");
+hintButton.addEventListener("click", getHint);
 
 function generateInputs() {
   const inputsContainer = document.querySelector(".inputs");
@@ -139,6 +144,16 @@ function handleChecks() {
       checkButton.disabled = true;
       messageArea.innerHTML = `You Lose! The word was <span>${wordToGuess}</span>`;
     }
+  }
+}
+
+function getHint() {
+  if (numOfHints > 0) {
+    numOfHints--;
+    document.querySelector(".hint span").innerHTML = numOfHints;
+  }
+  if (numOfHints === 0) {
+    hintButton.disabled = true;
   }
 }
 
