@@ -44,11 +44,36 @@ function generateInputs() {
   const inputs = document.querySelectorAll("input");
   inputs.forEach((input, index) => {
     // Convert input to Uppercase
+
     input.addEventListener("input", function () {
       this.value = this.value.toUpperCase();
-      //   moving to next input
+
+      //   moving to next input by typing letters
       const nextInput = inputs[index + 1];
       if (nextInput) nextInput.focus();
+    });
+    input.addEventListener("keydown", function (event) {
+      //   console.log(event); display props of the event keypressed key:ArrowLeft / target:(input#guess-1-letter-6)
+      const currentIndex = Array.from(inputs).indexOf(event.target); // getting index of target
+      console.log(currentIndex);
+      if (event.key === "ArrowRight" || event.key === "Enter") {
+        const nextInput = currentIndex + 1;
+        // making sure inside the range
+        if (nextInput < inputs.length) inputs[nextInput].focus();
+      } else if (event.key === "ArrowLeft") {
+        const prevInput = currentIndex - 1;
+        // making sure inside the range
+        if (prevInput >= 0) inputs[prevInput].focus();
+      } else if (event.key === "Backspace") {
+        const prevInput = currentIndex - 1;
+        // Clear current input if not empty, else move to previous input
+        if (inputs[currentIndex].value !== "") {
+          inputs[currentIndex].value = "";
+        } else if (prevInput >= 0) {
+          inputs[prevInput].focus();
+          inputs[prevInput].value = "";
+        }
+      }
     });
   });
 }
