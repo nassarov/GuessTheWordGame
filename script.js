@@ -34,6 +34,12 @@ function generateInputs() {
   }
   //   Focus Try 1
   inputsContainer.children[0].children[1].focus();
+
+  // disable inputs except first one (user can traverse through TAB to next inputs)
+  const inputInDisabledDiv = document.querySelectorAll(
+    ".disabled-inputs input"
+  );
+  inputInDisabledDiv.forEach((input) => (input.disabled = true));
 }
 
 window.onload = () => generateInputs();
