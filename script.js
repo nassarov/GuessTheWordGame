@@ -116,11 +116,15 @@ function handleChecks() {
   // Check if user win or lose
   if (successGuess) {
     messageArea.innerHTML = `You win The word was <span>${wordToGuess}</span>`;
+    if (numOfHints === 2) {
+      messageArea.innerHTML = `Congrats you did not even used a single Hint!`;
+    }
     // add disabled class to all inputs
     let allTries = document.querySelectorAll(".inputs > div");
     allTries.forEach((tryDiv) => tryDiv.classList.add("disabled-inputs"));
     // disable buttons
     checkButton.disabled = true;
+    hintButton.disabled = true;
   }
   //   needed now to access the rest inputs
   else {
