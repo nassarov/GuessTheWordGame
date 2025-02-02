@@ -27,7 +27,22 @@ header {
     border-radius: 6px;
     cursor: pointer;
   }
+  .options {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 20px;
+    .option-button {
+      padding: 10px;
+      background-color: lightcoral;
+      color: white;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  }
 }
+
 .top {
   position: relative;
   .close {
