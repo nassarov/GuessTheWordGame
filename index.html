@@ -7,30 +7,37 @@
     <title>Document</title>
   </head>
   <body>
-    <h1></h1>
+    <header>
+      <h1></h1>
+      <div class="keys">Game Guide</div>
+    </header>
+    <div class="overlay"></div>
     <div class="guess-game">
       <div class="game-area">
+        <div class="key-colors">
+          <div class="top">
+            <h2>Key Colors</h2>
+            <div class="close">X</div>
+          </div>
+          <div class="key-color">
+            <div class="key in-place"></div>
+            <div class="key-text">Letter is Correct and In Place</div>
+          </div>
+          <div class="key-color">
+            <div class="key not-in-place"></div>
+            <div class="key-text">Letter is Correct but Not In Place</div>
+          </div>
+          <div class="key-color">
+            <div class="key no"></div>
+            <div class="key-text">Wrong Letter</div>
+          </div>
+        </div>
         <div class="inputs"></div>
         <div class="control">
           <button class="check">Check Word</button>
           <button class="hint"><span></span> Hints</button>
         </div>
         <div class="message"></div>
-      </div>
-      <div class="key-colors">
-        <h2>Key Colors</h2>
-        <div class="key-color">
-          <div class="key in-place"></div>
-          <div class="key-text">Letter is Correct and In Place</div>
-        </div>
-        <div class="key-color">
-          <div class="key not-in-place"></div>
-          <div class="key-text">Letter is Correct but Not In Place</div>
-        </div>
-        <div class="key-color">
-          <div class="key no"></div>
-          <div class="key-text">Wrong Letter</div>
-        </div>
       </div>
     </div>
     <footer></footer>
