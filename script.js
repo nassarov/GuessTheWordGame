@@ -91,6 +91,7 @@ function generateInputs() {
           inputs[prevInput].value = "";
         }
         able();
+        messageArea.style.display = "none";
       }
     });
   });
@@ -138,8 +139,11 @@ function handleChecks() {
       successGuess = false;
     }
   }
+
   // Check if user win or lose
   if (successGuess) {
+    overlay.style.display = "block";
+    messageArea.style.display = "block";
     messageArea.innerHTML = `You win The word was <span>${wordToGuess}</span>`;
     if (numOfHints === 2) {
       messageArea.innerHTML = `Congrats you did not even used a single Hint!`;
@@ -154,7 +158,6 @@ function handleChecks() {
   //   needed now to access the rest inputs
   else {
     checkButton.disabled = true;
-
     // disable previous inputs
     document
       .querySelector(`.try-${currentTry}`)
@@ -173,7 +176,9 @@ function handleChecks() {
       ele.children[1].focus();
     } else {
       checkButton.disabled = true;
-      messageArea.innerHTML = `You Lose! The word was <span>${wordToGuess}</span>`;
+      messageArea.innerHTML = `You Failed! The word was <span>${wordToGuess}</span>`;
+      overlay.style.display = "block";
+      messageArea.style.display = "block";
     }
   }
 }
