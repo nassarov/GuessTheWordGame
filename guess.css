@@ -131,6 +131,64 @@ header {
     }
   }
 }
+.options-tab {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  text-align: center;
+  align-items: center;
+  font-size: 24px;
+  font-weight: 600;
+  padding: 20px;
+  width: 80%;
+  margin: 0 auto;
+  z-index: 2;
+  .nbL {
+    display: flex;
+    gap: 20px;
+    margin: 20px auto;
+    justify-content: center;
+
+    margin-bottom: 20p;
+    .char {
+      background-color: #333;
+      color: white;
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 26px;
+      cursor: pointer;
+    }
+    .selected {
+      background-color: #18ba89;
+    }
+    .char:hover {
+      background-color: #18ba89;
+    }
+  }
+
+  .difficulty {
+    display: flex;
+    flex-direction: column;
+    border-top: 2px solid #333;
+    .difs .diff {
+      padding: 10px 20px;
+      background-color: #333;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    .difs {
+      .selected {
+        background-color: #18ba89;
+      }
+    }
+    .diff:hover {
+      background-color: #18ba89;
+    }
+  }
+}
+
 .overlay {
   display: none;
   position: fixed;
