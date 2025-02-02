@@ -202,4 +202,17 @@ function getHint() {
   }
 }
 
+// Hide and Show Keys
+const guide = document.querySelector(".keys");
+const keys = document.querySelector(".key-colors");
+const close = document.querySelector(".close");
+const overlay = document.querySelector(".overlay");
+guide.addEventListener("click", toggleShow);
+close.addEventListener("click", toggleShow);
+function toggleShow() {
+  const isHidden = keys.style.display === "none" || keys.style.display === "";
+  keys.style.display = isHidden ? "block" : "none";
+  overlay.style.display = isHidden ? "block" : "none";
+}
+
 window.onload = () => generateInputs();
