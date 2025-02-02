@@ -67,13 +67,18 @@ header {
   p {
     margin-top: 15px;
   }
-  .reload {
-    width: 100px;
-    height: 50px;
-    background-color: #18ba89;
-    color: white;
-    text-align: center;
-  }
+}
+.reload {
+  width: 120px;
+  background-color: #18ba89;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+  margin: 20px auto;
+  font-size: 20px;
+  padding: 5px 10px;
+  border-radius: 6px;
+  line-height: 2;
 }
 .key-colors {
   display: none;

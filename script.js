@@ -144,13 +144,15 @@ function handleChecks() {
   if (successGuess) {
     overlay.style.display = "block";
     messageArea.style.display = "block";
-    messageArea.innerHTML = `You win The word was <span>${wordToGuess}</span>`;
+    messageArea.innerHTML = `You win The word was <span>${wordToGuess}</span><div class='reload'>Play Again</div>`;
     if (numOfHints === 2) {
-      messageArea.innerHTML = `Congrats you did not even used a single Hint!`;
+      messageArea.innerHTML = `Congrats you did not even used a single Hint!<div class='reload'>Play Again</div>`;
     }
     // add disabled class to all inputs
     let allTries = document.querySelectorAll(".inputs > div");
     allTries.forEach((tryDiv) => tryDiv.classList.add("disabled-inputs"));
+    let reload = document.querySelector(".reload");
+    reload.addEventListener("click", () => location.reload());
     // disable buttons
     checkButton.disabled = true;
     hintButton.disabled = true;
@@ -176,7 +178,9 @@ function handleChecks() {
       ele.children[1].focus();
     } else {
       checkButton.disabled = true;
-      messageArea.innerHTML = `You Failed! The word was <span>${wordToGuess}</span>`;
+      messageArea.innerHTML = `You Failed! The word was <span>${wordToGuess}</span> <div class='reload'>Play Again</div>`;
+      let reload = document.querySelector(".reload");
+      reload.addEventListener("click", () => location.reload());
       overlay.style.display = "block";
       messageArea.style.display = "block";
     }
