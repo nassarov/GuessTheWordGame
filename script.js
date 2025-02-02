@@ -22,6 +22,8 @@ const hintButton = document.querySelector(".hint");
 hintButton.addEventListener("click", getHint);
 
 function generateInputs() {
+  checkButton.disabled = true;
+
   const inputsContainer = document.querySelector(".inputs");
   //   Create Main Try Div
   for (let i = 1; i <= numOfTries; i++) {
@@ -54,8 +56,12 @@ function generateInputs() {
   inputInDisabledDiv.forEach((input) => (input.disabled = true));
 
   const inputs = document.querySelectorAll("input");
+
   inputs.forEach((input, index) => {
     // Convert input to Uppercase
+
+    // Enable check when all inputs filled
+    input.addEventListener("input", able);
 
     input.addEventListener("input", function () {
       this.value = this.value.toUpperCase();
@@ -84,6 +90,7 @@ function generateInputs() {
           inputs[prevInput].focus();
           inputs[prevInput].value = "";
         }
+        able();
       }
     });
   });
@@ -91,12 +98,30 @@ function generateInputs() {
 console.log(wordToGuess);
 const checkButton = document.querySelector(".check");
 checkButton.addEventListener("click", handleChecks);
+
+function able() {
+  let allFilled = true;
+  for (let i = 1; i <= numOfLetters; i++) {
+    const inputField = document.querySelector(
+      `#guess-${currentTry}-letter-${i}`
+    );
+    if (inputField.value === "") {
+      allFilled = false;
+      break;
+    }
+  }
+  checkButton.disabled = !allFilled;
+}
+
 function handleChecks() {
   let successGuess = true;
   for (let i = 1; i <= numOfLetters; i++) {
     const inputField = document.querySelector(
       `#guess-${currentTry}-letter-${i}`
     );
+    if (inputField.value === "") {
+      checkButton.disabled = true;
+    }
     const inputLetter = inputField.value.toLowerCase(); // letter
     const actualLetter = wordToGuess[i - 1]; //actual letter of word
 
@@ -128,6 +153,8 @@ function handleChecks() {
   }
   //   needed now to access the rest inputs
   else {
+    checkButton.disabled = true;
+
     // disable previous inputs
     document
       .querySelector(`.try-${currentTry}`)
