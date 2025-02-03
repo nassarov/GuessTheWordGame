@@ -127,6 +127,13 @@ function generateInputs() {
       input.type = "text";
       input.id = `guess-${i}-letter-${j}`;
       input.setAttribute("maxlength", "1");
+      // Prevent non-letter input
+      input.addEventListener("keydown", function (event) {
+        const regEx = /[a-zA-Z]/;
+        if (!regEx.test(event.key)) {
+          event.preventDefault();
+        }
+      });
       tryDiv.appendChild(input);
     }
 
