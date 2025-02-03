@@ -228,6 +228,7 @@ header {
   width: 1000px;
   margin: 20px auto;
   .game-area {
+    display: flex;
     .inputs > div {
       margin-bottom: 20px;
       display: flex;
