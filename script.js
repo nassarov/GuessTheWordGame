@@ -11,7 +11,10 @@ let currentTry = 1; // initial state focus on try 1
 let numOfHints = 2;
 // Manage Words
 let wordToGuess = "";
-const words = ["School", "Create", "Update", "Delete", "Master", "Branch"];
+const four = [];
+const five = [];
+const six = ["School", "Create", "Update", "Delete", "Master", "Branch"];
+const words = six;
 // random word
 wordToGuess = words[Math.floor(Math.random() * words.length)].toLowerCase();
 let messageArea = document.querySelector(".message");
@@ -224,4 +227,36 @@ function toggleShow() {
   overlay.style.display = isHidden ? "block" : "none";
 }
 
+const optionButton = document.querySelector(".option-button");
+const option = document.querySelector(".options-tab");
+optionButton.addEventListener("click", () => {
+  option.style.display = "flex";
+  overlay.style.display = "block";
+});
+
+// OPTION OBJ
+const gameOptions = {
+  numberOfLetters: 4,
+  difficulty: "Easy",
+};
+
+document.querySelector(".nbL").addEventListener("click", (event) => {
+  if (event.target.classList.contains("char")) {
+    document.querySelectorAll(".nbL .char").forEach((ele) => {
+      ele.classList.remove("selected");
+    });
+    event.target.classList.add("selected");
+    gameOptions.numberOfLetters = parseInt(event.target.textContent);
+  }
+});
+
+document.querySelector(".difs").addEventListener("click", (event) => {
+  if (event.target.classList.contains("diff")) {
+    document.querySelectorAll(".difs .diff").forEach((ele) => {
+      ele.classList.remove("selected");
+    });
+    event.target.classList.add("selected");
+    gameOptions.difficulty = event.target.innerHTML.trim();
+  }
+});
 window.onload = () => generateInputs();
