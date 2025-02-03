@@ -26,6 +26,7 @@ updateNumOfTries(); // default difficulty
 let currentTry = 1; // initial state focus on try 1
 function updateNumOfHints() {
   numOfHints = numOfTries === 5 ? 3 : numOfTries === 4 ? 2 : 1;
+  document.querySelector(".hint > span").innerHTML = numOfHints;
 }
 
 updateNumOfHints();
@@ -57,7 +58,6 @@ updateWords(); // initial word selection
 let messageArea = document.querySelector(".message");
 
 // Manage Hints in html
-document.querySelector(".hint > span").innerHTML = numOfHints;
 const hintButton = document.querySelector(".hint");
 hintButton.addEventListener("click", getHint);
 
@@ -94,6 +94,8 @@ document.querySelector(".difs").addEventListener("click", (event) => {
     generateInputs(); // Regenerate input
   }
 });
+
+
 // End Options
 
 function generateInputs() {
@@ -195,7 +197,7 @@ function able() {
 
 function handleChecks() {
   let successGuess = true;
-  for (let i = 1; i <= gameOptions.numberOfLetters; i++) {
+  for (let i = 1; i <= numOfLetters; i++) {
     const inputField = document.querySelector(
       `#guess-${currentTry}-letter-${i}`
     );
