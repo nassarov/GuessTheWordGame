@@ -202,7 +202,7 @@ function able() {
 
 function handleChecks() {
   let successGuess = true;
-  for (let i = 1; i <= numOfLetters; i++) {
+  for (let i = 1; i <= gameOptions.numberOfLetters; i++) {
     const inputField = document.querySelector(
       `#guess-${currentTry}-letter-${i}`
     );
