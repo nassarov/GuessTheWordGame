@@ -166,7 +166,7 @@ function generateInputs() {
     input.addEventListener("keydown", function (event) {
       //   console.log(event); display props of the event keypressed key:ArrowLeft / target:(input#guess-1-letter-6)
       const currentIndex = Array.from(inputs).indexOf(event.target); // getting index of target
-      if (event.key === "ArrowRight" || event.key === "Enter") {
+      if (event.key === "ArrowRight") {
         const nextInput = currentIndex + 1;
         // making sure inside the range
         if (nextInput < inputs.length) inputs[nextInput].focus();
@@ -174,6 +174,12 @@ function generateInputs() {
         const prevInput = currentIndex - 1;
         // making sure inside the range
         if (prevInput >= 0) inputs[prevInput].focus();
+      } else if (event.key === "Enter") {
+        event.preventDefault();
+        able(); // Update button state check
+        if (!checkButton.disabled) {
+          handleChecks();
+        }
       } else if (event.key === "Backspace") {
         const prevInput = currentIndex - 1;
         // Clear current input if not empty, else move to previous input
