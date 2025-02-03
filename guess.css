@@ -229,6 +229,7 @@ header {
   margin: 20px auto;
   .game-area {
     display: flex;
+    margin-bottom: 80px;
     .inputs > div {
       margin-bottom: 20px;
       display: flex;
@@ -249,6 +250,7 @@ header {
       gap: 14px;
       .check {
         border: none;
+        margin-left: 20px;
         padding: 15px;
         font-size: 25px;
         font-weight: 500;
