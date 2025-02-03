@@ -95,6 +95,11 @@ document.querySelector(".difs").addEventListener("click", (event) => {
   }
 });
 
+const saveButton = document.querySelector(".save");
+saveButton.addEventListener("click", function () {
+  overlay.style.display = "none";
+  option.style.display = "none";
+});
 
 // End Options
 
