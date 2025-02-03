@@ -4,19 +4,56 @@ document.title = gameName;
 document.querySelector("h1").innerHTML = gameName;
 document.querySelector("footer").innerHTML = `${gameName} Created By Nassarov`;
 
+// OPTION OBJ
+const gameOptions = {
+  numberOfLetters: 4,
+  difficulty: "Easy",
+};
+
+// Update numOfTries whenever difficulty changes
+function updateNumOfTries() {
+  numOfTries =
+    gameOptions.difficulty.toLowerCase() === "easy"
+      ? 5
+      : gameOptions.difficulty.toLowerCase() === "medium"
+      ? 4
+      : 3;
+}
+
 // Setting Game Options
-let numOfTries = 3;
-let numOfLetters = 6;
+updateNumOfTries(); // default difficulty
+
 let currentTry = 1; // initial state focus on try 1
-let numOfHints = 2;
+function updateNumOfHints() {
+  numOfHints = numOfTries === 5 ? 3 : numOfTries === 4 ? 2 : 1;
+}
+
+updateNumOfHints();
+
 // Manage Words
 let wordToGuess = "";
-const four = [];
-const five = [];
-const six = ["School", "Create", "Update", "Delete", "Master", "Branch"];
-const words = six;
-// random word
-wordToGuess = words[Math.floor(Math.random() * words.length)].toLowerCase();
+const four = ["Game", "Door", "Boat", "Fish", "Rock"];
+const five = ["Apple", "Brain", "House", "Tiger", "Money"];
+const six = ["Branch", "Garden", "Forest", "System", "Police", "School"];
+const seven = ["Victory", "Mystery", "Freedom", "Journey", "Weather"];
+
+function updateWords() {
+  const words =
+    gameOptions.numberOfLetters === 5
+      ? five
+      : gameOptions.numberOfLetters === 6
+      ? six
+      : gameOptions.numberOfLetters === 7
+      ? seven
+      : four;
+
+  wordToGuess = words[Math.floor(Math.random() * words.length)].toLowerCase();
+  console.log(words);
+  console.log(gameOptions.numberOfLetters);
+}
+
+updateWords(); // initial word selection
+
 let messageArea = document.querySelector(".message");
 
 // Manage Hints in html
@@ -24,10 +61,49 @@ document.querySelector(".hint > span").innerHTML = numOfHints;
 const hintButton = document.querySelector(".hint");
 hintButton.addEventListener("click", getHint);
 
+// Options
+const optionButton = document.querySelector(".option-button");
+const option = document.querySelector(".options-tab");
+optionButton.addEventListener("click", () => {
+  option.style.display = "flex";
+  overlay.style.display = "block";
+});
+
+document.querySelector(".nbL").addEventListener("click", (event) => {
+  if (event.target.classList.contains("char")) {
+    document.querySelectorAll(".nbL .char").forEach((ele) => {
+      ele.classList.remove("selected");
+    });
+    event.target.classList.add("selected");
+    gameOptions.numberOfLetters = parseInt(event.target.textContent);
+    console.log(gameOptions.numberOfLetters);
+    updateWords(); // Update words
+    generateInputs(); // Regenerate inputs
+  }
+});
+
+document.querySelector(".difs").addEventListener("click", (event) => {
+  if (event.target.classList.contains("diff")) {
+    document.querySelectorAll(".difs .diff").forEach((ele) => {
+      ele.classList.remove("selected");
+    });
+    event.target.classList.add("selected");
+    gameOptions.difficulty = event.target.innerHTML.trim();
+    updateNumOfTries(); // Update numOfTries
+    updateNumOfHints(); // Update hints
+    generateInputs(); // Regenerate input
+  }
+});
+// End Options
+
 function generateInputs() {
   checkButton.disabled = true;
 
   const inputsContainer = document.querySelector(".inputs");
+
+  // Clear previous input fields
+  inputsContainer.innerHTML = "";
+
   //   Create Main Try Div
   for (let i = 1; i <= numOfTries; i++) {
     const tryDiv = document.createElement("div");
@@ -39,7 +115,7 @@ function generateInputs() {
       tryDiv.classList.add("disabled-inputs");
     }
     // Create Letter Inputs
-    for (let j = 1; j <= numOfLetters; j++) {
+    for (let j = 1; j <= gameOptions.numberOfLetters; j++) {
       const input = document.createElement("input");
       input.type = "text";
       input.id = `guess-${i}-letter-${j}`;
@@ -105,7 +181,7 @@ checkButton.addEventListener("click", handleChecks);
 
 function able() {
   let allFilled = true;
-  for (let i = 1; i <= numOfLetters; i++) {
+  for (let i = 1; i <= gameOptions.numberOfLetters; i++) {
     const inputField = document.querySelector(
       `#guess-${currentTry}-letter-${i}`
     );
@@ -119,7 +195,7 @@ function able() {
 
 function handleChecks() {
   let successGuess = true;
-  for (let i = 1; i <= numOfLetters; i++) {
+  for (let i = 1; i <= gameOptions.numberOfLetters; i++) {
     const inputField = document.querySelector(
       `#guess-${currentTry}-letter-${i}`
     );
@@ -227,36 +303,4 @@ function toggleShow() {
   overlay.style.display = isHidden ? "block" : "none";
 }
 
-const optionButton = document.querySelector(".option-button");
-const option = document.querySelector(".options-tab");
-optionButton.addEventListener("click", () => {
-  option.style.display = "flex";
-  overlay.style.display = "block";
-});
-
-// OPTION OBJ
-const gameOptions = {
-  numberOfLetters: 4,
-  difficulty: "Easy",
-};
-
-document.querySelector(".nbL").addEventListener("click", (event) => {
-  if (event.target.classList.contains("char")) {
-    document.querySelectorAll(".nbL .char").forEach((ele) => {
-      ele.classList.remove("selected");
-    });
-    event.target.classList.add("selected");
-    gameOptions.numberOfLetters = parseInt(event.target.textContent);
-  }
-});
-
-document.querySelector(".difs").addEventListener("click", (event) => {
-  if (event.target.classList.contains("diff")) {
-    document.querySelectorAll(".difs .diff").forEach((ele) => {
-      ele.classList.remove("selected");
-    });
-    event.target.classList.add("selected");
-    gameOptions.difficulty = event.target.innerHTML.trim();
-  }
-});
 window.onload = () => generateInputs();
